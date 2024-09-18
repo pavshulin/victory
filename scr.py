@@ -47,16 +47,19 @@ def text_to_speech(text, output_audio_file):
     # Set up the text input to be synthesized
     synthesis_input = texttospeech.SynthesisInput(text=text)
 
+    # Set the voice parameters for Russian Wavenet male voice D
     voice = texttospeech.VoiceSelectionParams(
-        # CHOOSE YOUR DESTINY
-        language_code="ru-RU",
-        name="ru-RU-Wavenet-B", 
-        ssml_gender=texttospeech.SsmlVoiceGender.MALE  # You can also use FEMALE or MALE
+        language_code="ru-RU",                # Russian language code
+        name="ru-RU-Wavenet-D",               # Specific voice
+        ssml_gender=texttospeech.SsmlVoiceGender.MALE
     )
 
-    # Select the type of audio file to return (MP3 format)
+    # Set the audio config as per your request
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16,  # LINEAR16 format for WAV output
+        effects_profile_id=["headphone-class-device"],       # Effects profile for headphones
+        pitch=0,                                             # Default pitch
+        speaking_rate=1                                      # Normal speaking rate
     )
 
     # Perform the text-to-speech request
